@@ -220,9 +220,12 @@ class Program
 
                     //Creating Query to update the new information
                     string updateQuery = "UPDATE Car SET ";
+
+                    //This list will hold only the data to be updated
                     List<string> updateFields = new List<string>();
                     MySqlCommand updateCommand = new MySqlCommand();
 
+                    //If the variable is not null or has value, it saves the data in the updateFields list and the updateCommand as the new data
                     if (newMake != null)
                     {
                         updateFields.Add("Make = @Make");
@@ -249,6 +252,7 @@ class Program
 
                     if (updateFields.Count > 0)
                     {
+                        //It finishes de query to be send to the data base by adding the fields to be updated from the updateFields
                         updateQuery += string.Join(", ", updateFields) + " WHERE CarID = @CarID";
                         updateCommand.CommandText = updateQuery;
                         updateCommand.Connection = cnx;
